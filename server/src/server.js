@@ -3,10 +3,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 import logger from 'morgan';
 import schema from './schema';
+import db from './models';
 
 const PORT = process.env.PORT || 4000;
 
 const server = new GraphQLServer({ schema });
+
+db.sequelize.sync();
 
 server.express.use(logger('dev'));
 
