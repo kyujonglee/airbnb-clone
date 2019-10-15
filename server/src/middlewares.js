@@ -1,4 +1,4 @@
-const isAuthenticate = (req, res, next) => {
+export const isAuthenticate = (req, res, next) => {
   if (req.user) {
     next();
   } else {

@@ -1,5 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
 import passport from 'passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { User } from './models';

@@ -1,10 +1,12 @@
+import './env';
 import { GraphQLServer } from 'graphql-yoga';
-import dotenv from 'dotenv';
-dotenv.config();
 import logger from 'morgan';
+import passport from 'passport';
 import schema from './schema';
-import db, { User } from './models';
+import db from './models';
 import { authenticate } from './passport';
+
+import './passport';
 
 const PORT = process.env.PORT || 4000;
 
