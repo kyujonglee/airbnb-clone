@@ -12,7 +12,7 @@ const server = new GraphQLServer({
   context: ({ request }) => ({ request })
 });
 
-db.sequelize.sync({ force: true });
+db.sequelize.sync();
 
 server.express.use(logger('dev'));
 
