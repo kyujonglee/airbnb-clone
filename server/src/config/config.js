@@ -5,7 +5,9 @@ module.exports = {
     database: 'membership_airbnb',
     host: '127.0.0.1',
     dialect: 'mysql',
-    operatorsAliases: false
+    operatorsAliases: 'no-op',
+    charset: 'utf8',
+    collate: 'utf8_general_ci'
   },
   test: {
     username: 'root',
