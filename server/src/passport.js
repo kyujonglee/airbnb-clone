@@ -21,5 +21,13 @@ const verify = async (payload, done) => {
   }
 };
 
+export const authenticate = (req, res, next) =>
+  passport.authenticate('jwt', { session: false }, (err, user) => {
+    if (user) {
+      req.user = user;
+    }
+    next();
+  })(req, res, next);
+
 passport.use(new Strategy(jwtOptions, verify));
 passport.initialize();
