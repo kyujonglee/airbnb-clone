@@ -1,12 +1,13 @@
 type User {
-  id: String!
+  id: Int!
   email: String!
   password: String!
   name: String!
+  reservation: [Reservation!]
 }
 
 type Room {
-  id: String!
+  id: Int!
   price: Int!
   rating: Float
   title: String!
@@ -15,6 +16,32 @@ type Room {
   bedroom: Int
   bed: Int
   bathroom: Int
-  created_at: String!
-  updated_at: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Person {
+  id: Int!
+  name: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Reservation {
+  checkIn: String!
+  checkOut: String!
+  createdAt: String!
+  updatedAt: String!
+  room: Room!
+  user: User!
+  reservation_people: [ReservationPerson!]
+  countPeople: Int!
+  person: [Person!]!
+}
+
+type ReservationPerson {
+  id: Int!
+  count: Int!
+  reservation: [Reservation!]!
+  person: Person!
 }

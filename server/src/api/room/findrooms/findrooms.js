@@ -2,10 +2,9 @@ import { Room } from '../../../models';
 
 export default {
   Query: {
-    findRooms: async (_, args) => {
+    findRooms: (_, args) => {
       try {
-        const rooms = await Room.findAll({});
-        return rooms;
+        return Room.findAll({});
       } catch (error) {
         return [];
       }
