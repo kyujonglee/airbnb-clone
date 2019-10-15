@@ -15,7 +15,7 @@ const server = new GraphQLServer({
   context: ({ request }) => ({ request })
 });
 
-db.sequelize.sync();
+db.sequelize.sync({ force: true });
 
 server.express.use(logger('dev'));
 server.express.use(authenticate);

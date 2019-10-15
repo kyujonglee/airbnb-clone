@@ -1,30 +1,22 @@
 export default (sequelize, DataTypes) =>
   sequelize.define(
-    'user',
+    'person',
     {
-      email: {
+      name: {
         type: DataTypes.STRING(100),
         allowNull: false,
         unique: true
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      password: {
-        type: DataTypes.STRING(200),
-        allowNull: false
-      },
-      created_at: {
+      createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.literal('NOW()')
       },
-      updated_at: {
+      updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.literal('NOW()')
       }
     },
-    { timestamps: false, underscored: false }
+    { timestamps: false }
   );

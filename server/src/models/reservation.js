@@ -1,30 +1,25 @@
 export default (sequelize, DataTypes) =>
   sequelize.define(
-    'user',
+    'reservation',
     {
-      email: {
-        type: DataTypes.STRING(100),
-        allowNull: false,
-        unique: true
-      },
-      name: {
-        type: DataTypes.STRING,
+      checkIn: {
+        type: DataTypes.DATE,
         allowNull: false
       },
-      password: {
-        type: DataTypes.STRING(200),
+      checkOut: {
+        type: DataTypes.DATE,
         allowNull: false
       },
-      created_at: {
+      createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.literal('NOW()')
       },
-      updated_at: {
+      updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.literal('NOW()')
       }
     },
-    { timestamps: false, underscored: false }
+    { timestamps: false }
   );

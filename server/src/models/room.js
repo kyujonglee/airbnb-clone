@@ -17,7 +17,7 @@ export default (sequelize, DataTypes) =>
       content: {
         type: DataTypes.TEXT
       },
-      img_path: {
+      imgPath: {
         type: DataTypes.STRING(200)
       },
       bedroom: {
@@ -32,16 +32,16 @@ export default (sequelize, DataTypes) =>
         type: DataTypes.INTEGER,
         defaultValue: '0'
       },
-      created_at: {
+      createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.literal('NOW()')
       },
-      updated_at: {
+      updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.literal('NOW()')
       }
     },
-    { timestamps: false, underscored: true }
+    { timestamps: false, underscored: false }
   );

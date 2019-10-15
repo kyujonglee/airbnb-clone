@@ -4,3 +4,17 @@ type User {
   password: String!
   name: String!
 }
+
+type Room {
+  id: String!
+  price: Int!
+  rating: Float
+  title: String!
+  content: String
+  imgPath: String
+  bedroom: Int
+  bed: Int
+  bathroom: Int
+  created_at: String!
+  updated_at: String!
+}
