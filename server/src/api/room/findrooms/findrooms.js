@@ -15,29 +15,31 @@ export default {
         let dateOptions = {};
         if (priceStart && priceEnd) {
           priceOptions = {
-            ...priceOptions,
             price: { [Op.between]: [priceStart, priceEnd] }
           };
         }
         if (checkIn && checkOut) {
           dateOptions = {
-            ...dateOptions,
-            [Op.or]: [
-              { checkOut: { [Op.lt]: checkIn } },
-              { checkIn: { [Op.gt]: checkOut } }
-            ]
+            [Op.not]: {
+              [Op.or]: [
+                { checkOut: { [Op.lt]: checkIn } },
+                { checkIn: { [Op.gt]: checkOut } }
+              ]
+            }
           };
         }
         const rooms = await Room.findAll({
           include: [
             {
               model: Reservation,
+              required: false,
               where: dateOptions
             }
           ],
-          where: priceOptions
+          where: priceOptions,
+          order: [['rating', 'desc']]
         });
-        return rooms;
+        return rooms.filter(room => room.reservations.length === 0);
       } catch (error) {
         console.log(error);
         return [];

@@ -18,7 +18,7 @@ type Room {
   createdAt: String!
   updatedAt: String!
   maximumGuest: Int
-  reservations: [Reservation!]
+  reservations: [Reservation]
 }
 
 type Person {
@@ -29,6 +29,7 @@ type Person {
 }
 
 type Reservation {
+  id: Int!
   checkIn: String!
   checkOut: String!
   createdAt: String!

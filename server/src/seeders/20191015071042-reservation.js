@@ -4,14 +4,14 @@ export default {
       'reservations',
       [
         {
-          checkIn: new Date(2019, 11, 11),
-          checkOut: new Date(2019, 11, 13),
+          checkIn: new Date('2019-11-11'),
+          checkOut: new Date('2019-11-13'),
           userId: 1,
           roomId: 2
         },
         {
-          checkIn: new Date(2019, 11, 20),
-          checkOut: new Date(2019, 11, 25),
+          checkIn: new Date('2019-11-20'),
+          checkOut: new Date('2019-11-25'),
           userId: 2,
           roomId: 1
         }
