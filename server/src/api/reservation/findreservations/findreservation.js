@@ -5,19 +5,20 @@ import {
   ReservationPerson,
   Person
 } from '../../../models';
+import { isAuthenticate } from '../../../middlewares';
 
 export default {
   Query: {
-    findReservations: async (_, args) => {
+    findReservations: (_, __, { request }) => {
+      isAuthenticate(request);
       try {
-        const reservations = await Reservation.findAll({
+        return Reservation.findAll({
           include: [
             { model: Room },
             { model: User },
             { model: ReservationPerson, include: [Person] }
           ]
         });
-        return reservations;
       } catch (error) {
         console.log(error);
         return [];

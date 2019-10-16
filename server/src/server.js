@@ -1,7 +1,7 @@
 import './env';
 import { GraphQLServer } from 'graphql-yoga';
 import logger from 'morgan';
-import passport from 'passport';
+import helmet from 'helmet';
 import schema from './schema';
 import db from './models';
 import { authenticate } from './passport';
@@ -17,6 +17,7 @@ const server = new GraphQLServer({
 
 db.sequelize.sync();
 
+server.express.use(helmet());
 server.express.use(logger('dev'));
 server.express.use(authenticate);
 

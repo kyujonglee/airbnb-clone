@@ -41,7 +41,6 @@ export default {
         });
         return rooms.filter(room => room.reservations.length === 0);
       } catch (error) {
-        console.log(error);
         return [];
       }
     }

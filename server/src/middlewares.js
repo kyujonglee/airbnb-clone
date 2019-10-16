@@ -1,6 +1,6 @@
-export const isAuthenticate = (req, res, next) => {
+export const isAuthenticate = req => {
   if (req.user) {
-    next();
+    return;
   } else {
     throw Error('Authentication rights are required.');
   }

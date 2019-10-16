@@ -1,0 +1,7 @@
+type Mutation {
+  createReservation(
+    checkIn: String!
+    checkOut: String!
+    roomId: Int!
+  ): Reservation!
+}
