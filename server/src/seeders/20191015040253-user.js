@@ -1,20 +1,18 @@
 import bcrypt from 'bcrypt';
 
-module.exports = {
+export default {
   up: async (queryInterface, Sequelize) => {
     const saltRounds = 10;
     return queryInterface.bulkInsert(
       'Users',
       [
         {
-          email: 'kyujong93@naver.com',
-          password: await bcrypt.hash('toddlf20', saltRounds),
-          name: 'KyuKyu'
+          name: 'KyuKyu',
+          naverId: 'fdkslfjdsfjdfjs'
         },
         {
-          email: 'kyujong93@gmail.com',
-          password: await bcrypt.hash('toddlf20', saltRounds),
-          name: 'beautiful name'
+          name: 'beautiful name',
+          naverId: 'fjdiojfdkfnfdifjdk1'
         }
       ],
       {}

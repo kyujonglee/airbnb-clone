@@ -1,11 +1,26 @@
 import { Room } from '../../../models';
+import db from '../../../models';
 
 export default {
   Query: {
-    findRooms: (_, args) => {
+    findRooms: async (_, args) => {
+      const {
+        Sequelize: { Op }
+      } = db;
+      let { priceStart, priceEnd, checkIn, checkOut } = args;
+      if (checkIn) checkIn = new Date(checkIn);
+      if (checkOut) checkOut = new Date(checkOut);
       try {
-        return Room.findAll({});
+        let options = {};
+        const rooms = await Room.findAll({
+          where: {
+            price: { [Op.between]: [priceStart, priceEnd] },
+            include: [{model: Reservation}]
+          }
+        });
+        return rooms;
       } catch (error) {
+        console.log(error);
         return [];
       }
     }

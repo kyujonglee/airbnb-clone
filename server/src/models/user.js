@@ -2,17 +2,12 @@ export default (sequelize, DataTypes) =>
   sequelize.define(
     'user',
     {
-      email: {
-        type: DataTypes.STRING(100),
-        allowNull: false,
-        unique: true
-      },
       name: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      password: {
-        type: DataTypes.STRING(200),
+      naverId: {
+        type: DataTypes.STRING,
         allowNull: false
       },
       created_at: {

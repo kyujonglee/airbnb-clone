@@ -1,5 +1,5 @@
 import passport from 'passport';
-import { Strategy, ExtractJwt } from 'passport-jwt';
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import { User } from './models';
 
 const jwtOptions = {
@@ -27,5 +27,5 @@ export const authenticate = (req, res, next) =>
     next();
   })(req, res, next);
 
-passport.use(new Strategy(jwtOptions, verify));
+passport.use(new JwtStrategy(jwtOptions, verify));
 passport.initialize();

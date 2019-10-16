@@ -1,10 +1,20 @@
-'use strict';
+import csv from 'csvtojson';
+import path from 'path';
 
-module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert(
-      'Rooms',
-      [
+export default {
+  up: async (queryInterface, Sequelize) => {
+    const csvFilePath = path.join(__dirname, '../room.csv');
+    const jsonArray = await csv().fromFile(csvFilePath);
+    return queryInterface.bulkInsert('Rooms', jsonArray, {});
+  },
+
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete('Rooms', null, {});
+  }
+};
+
+/*
+[
         {
           price: 120000,
           rating: 4.5,
@@ -31,12 +41,5 @@ module.exports = {
           bed: 2,
           bathroom: 1
         }
-      ],
-      {}
-    );
-  },
-
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Rooms', null, {});
-  }
-};
+      ]
+*/

@@ -18,6 +18,7 @@ type Room {
   bathroom: Int
   createdAt: String!
   updatedAt: String!
+  maximumGuest: Int
 }
 
 type Person {

@@ -5,19 +5,15 @@ import RoomModel from './room';
 import PersonModel from './person';
 import ReservationModel from './reservation';
 import ReservationPersonModel from './reservation_person';
+
 const env = process.env.NODE_ENV || 'development';
 const config = require(path.join(__dirname, '/../config/config.js'))[env];
-const db = {};
-
 const sequelize = new Sequelize(
   config.database,
   config.username,
   config.password,
   config
 );
-
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
 export const ReservationPerson = ReservationPersonModel(sequelize, Sequelize);
 export const Reservation = ReservationModel(sequelize, Sequelize);
@@ -34,4 +30,7 @@ ReservationPerson.belongsTo(Reservation);
 Person.hasMany(ReservationPerson);
 ReservationPerson.belongsTo(Person);
 
-export default db;
+export default {
+  sequelize,
+  Sequelize
+};

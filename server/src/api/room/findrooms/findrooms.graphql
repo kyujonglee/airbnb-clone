@@ -1,3 +1,8 @@
 type Query {
-  findRooms: [Room!]!
+  findRooms(
+    priceStart: Int
+    priceEnd: Int
+    checkIn: String
+    checkOut: String
+  ): [Room!]!
 }

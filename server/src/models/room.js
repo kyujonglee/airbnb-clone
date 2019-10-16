@@ -10,6 +10,10 @@ export default (sequelize, DataTypes) =>
         type: DataTypes.FLOAT,
         defaultValue: '0.0'
       },
+      maximumGuest: {
+        type: DataTypes.INTEGER,
+        defaultValue: '0'
+      },
       title: {
         type: DataTypes.STRING(100),
         allowNull: false
