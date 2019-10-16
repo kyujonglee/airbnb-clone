@@ -1,4 +1,4 @@
-import { Room } from '../../../models';
+import { Room, Reservation } from '../../../models';
 import db from '../../../models';
 
 export default {
@@ -11,12 +11,31 @@ export default {
       if (checkIn) checkIn = new Date(checkIn);
       if (checkOut) checkOut = new Date(checkOut);
       try {
-        let options = {};
+        let priceOptions = {};
+        let dateOptions = {};
+        if (priceStart && priceEnd) {
+          priceOptions = {
+            ...priceOptions,
+            price: { [Op.between]: [priceStart, priceEnd] }
+          };
+        }
+        if (checkIn && checkOut) {
+          dateOptions = {
+            ...dateOptions,
+            [Op.or]: [
+              { checkOut: { [Op.lt]: checkIn } },
+              { checkIn: { [Op.gt]: checkOut } }
+            ]
+          };
+        }
         const rooms = await Room.findAll({
-          where: {
-            price: { [Op.between]: [priceStart, priceEnd] },
-            include: [{model: Reservation}]
-          }
+          include: [
+            {
+              model: Reservation,
+              where: dateOptions
+            }
+          ],
+          where: priceOptions
         });
         return rooms;
       } catch (error) {

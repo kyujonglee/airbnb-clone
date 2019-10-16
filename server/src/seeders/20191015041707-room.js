@@ -4,7 +4,11 @@ import path from 'path';
 export default {
   up: async (queryInterface, Sequelize) => {
     const csvFilePath = path.join(__dirname, '../room.csv');
-    const jsonArray = await csv().fromFile(csvFilePath);
+    let jsonArray = await csv().fromFile(csvFilePath);
+    jsonArray = jsonArray.map(row => {
+      row = { ...row, price: row.price * 1000 };
+      return row;
+    });
     return queryInterface.bulkInsert('Rooms', jsonArray, {});
   },
 

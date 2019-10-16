@@ -1,8 +1,7 @@
 type User {
   id: Int!
-  email: String!
-  password: String!
   name: String!
+  naverId: String!
   reservation: [Reservation!]
 }
 
@@ -19,6 +18,7 @@ type Room {
   createdAt: String!
   updatedAt: String!
   maximumGuest: Int
+  reservations: [Reservation!]
 }
 
 type Person {
