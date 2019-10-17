@@ -36,6 +36,7 @@ const ButtonS = styled.button`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  text-transform: capitalize;
   &:hover {
     background-color: ${props => darken(0.1, props.theme[props.color])};
   }

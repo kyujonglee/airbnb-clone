@@ -22,8 +22,8 @@ const InputS = styled.input`
   border-radius: 0.2rem;
   border: 1px solid rgba(0, 0, 0, 0.15);
   ${fontSizeStyles}
-  & + & {
-    margin: 0.5rem 0px;
+  &:not(:last-child) {
+    margin-bottom: 0.5rem;
   }
 `;
 

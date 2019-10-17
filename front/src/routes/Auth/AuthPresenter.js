@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Box = styled.div`
+const Form = styled.form`
   width: 400px;
   height: auto;
   padding: 1rem;
@@ -70,23 +70,66 @@ const Text = styled.a`
   color: ${props => props.theme.indigo};
 `;
 
-const AuthPresenter = () => (
-  <Wrapper>
-    <Box>
-      <TitleContainer>
-        <Title> log in to </Title>
-        <BoldTitle>airbnb</BoldTitle>
-      </TitleContainer>
-      <Input placeholder={'email'} size={'small'} />
-      <Input placeholder={'password'} type={'password'} size={'small'} />
-      <ButtonS text={'로그인'} full={true} />
-      <NaverButton text={'네이버 아이디로 로그인'} />
-      <SignContainer>
-        <SubText>don't have an account?</SubText>
-        <Text>sign in</Text>
-      </SignContainer>
-    </Box>
-  </Wrapper>
+const AuthPresenter = ({ action, email, password, onSubmit, setAction, naverLogin }) => (
+  <>
+    {action === 'login' && (
+      <Wrapper>
+        <Form onSubmit={onSubmit}>
+          <TitleContainer>
+            <Title> log in to </Title>
+            <BoldTitle>airbnb</BoldTitle>
+          </TitleContainer>
+          <Input
+            placeholder={'email'}
+            type={'email'}
+            size={'small'}
+            {...email}
+          />
+          <Input
+            placeholder={'password'}
+            type={'password'}
+            size={'small'}
+            {...password}
+          />
+          <ButtonS text={'log in'} full={true} />
+          <NaverButton onClick={naverLogin} text={'네이버 아이디로 로그인'} />
+          <SignContainer>
+            <SubText>don't have an account?</SubText>
+            <Text onClick={() => setAction('signIn')}>sign in</Text>
+          </SignContainer>
+        </Form>
+      </Wrapper>
+    )}
+    {action === 'signIn' && (
+      <Wrapper>
+        <Form>
+          <TitleContainer>
+            <Title> sign In to </Title>
+            <BoldTitle>airbnb</BoldTitle>
+          </TitleContainer>
+          <Input
+            placeholder={'email'}
+            type={'email'}
+            size={'small'}
+            {...email}
+          />
+          <Input
+            placeholder={'password'}
+            type={'password'}
+            size={'small'}
+            {...password}
+          />
+          <Input placeholder={'password2'} type={'password'} size={'small'} />
+          <Input placeholder={'name'} size={'small'} />
+          <ButtonS href="/" text={'sign in'} full={true} />
+          <SignContainer>
+            <SubText>if you have an account?</SubText>
+            <Text onClick={() => setAction('login')}>log in</Text>
+          </SignContainer>
+        </Form>
+      </Wrapper>
+    )}
+  </>
 );
 
 export default AuthPresenter;
