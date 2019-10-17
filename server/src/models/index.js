@@ -23,10 +23,13 @@ export const Person = PersonModel(sequelize, Sequelize);
 
 User.hasMany(Reservation);
 Reservation.belongsTo(User);
+
 Room.hasMany(Reservation);
 Reservation.belongsTo(Room);
+
 Reservation.hasMany(ReservationPerson);
 ReservationPerson.belongsTo(Reservation);
+
 Person.hasMany(ReservationPerson);
 ReservationPerson.belongsTo(Person);
 

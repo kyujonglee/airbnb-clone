@@ -10,7 +10,6 @@ import { isAuthenticate } from '../../../middlewares';
 export default {
   Query: {
     findReservations: (_, __, { request }) => {
-      isAuthenticate(request);
       try {
         return Reservation.findAll({
           include: [
