@@ -23,7 +23,7 @@ const InputS = styled.input`
   border: 1px solid rgba(0, 0, 0, 0.15);
   ${fontSizeStyles}
   & + & {
-    margin: 0.5rem;
+    margin: 0.5rem 0px;
   }
 `;
 

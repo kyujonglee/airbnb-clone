@@ -8,5 +8,9 @@ export default {
   `,
   bgColor: '#EFF3F5',
   airbnbRed: '#FE595E',
-  textColor: '#484848'
+  textColor: '#484848',
+  gray: '#ced4da',
+  indigo: '#5c7cfa',
+  teal: '#20c997',
+  orange: '#ffc078'
 };

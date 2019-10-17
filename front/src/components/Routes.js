@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
-import Auth from '../routers/Auth';
-import Reservation from '../routers/Rooms';
+import Auth from '../routes/Auth';
+import Reservation from '../routes/Rooms';
 
 const LoggedIn = () => (
   <Switch>
