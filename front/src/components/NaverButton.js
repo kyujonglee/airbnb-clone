@@ -41,9 +41,9 @@ const Text = styled.span`
   font-weight: 500;
 `;
 
-const NaverButton = ({ text }) => {
+const NaverButton = ({ text, onClick }) => {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <Column>
         <Logo>N</Logo>
       </Column>

@@ -32,6 +32,6 @@ export const naverLoginCallback = async (
 
 export const createToken = (req, res) => {
   const token = generateToken({ id: req.user.id });
-  res.redirect(`http://localhost:3000/?token=${token}`);
-  // res.json({ token: false });
+  res.cookie('token', token);
+  res.redirect('http://localhost:3000');
 };

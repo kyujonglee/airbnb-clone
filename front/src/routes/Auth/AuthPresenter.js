@@ -70,7 +70,14 @@ const Text = styled.a`
   color: ${props => props.theme.indigo};
 `;
 
-const AuthPresenter = ({ action, email, password, onSubmit, setAction, naverLogin }) => (
+const AuthPresenter = ({
+  action,
+  email,
+  password,
+  onSubmit,
+  setAction,
+  naverLogin
+}) => (
   <>
     {action === 'login' && (
       <Wrapper>
