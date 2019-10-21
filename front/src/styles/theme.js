@@ -8,6 +8,7 @@ export default {
   `,
   bgColor: '#EFF3F5',
   airbnbRed: '#FE595E',
+  airbnbGreen: '#008387',
   textColor: '#484848',
   gray: '#ced4da',
   indigo: '#5c7cfa',

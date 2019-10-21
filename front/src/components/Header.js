@@ -8,35 +8,40 @@ import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 8vh;
+  height: 6vh;
   color: white;
 `;
 
 const Container = styled.div`
   width: 80%;
+  height: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0rem;
+  padding: 0.3rem 0rem;
 `;
 
 const Column = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:first-child {
     font-weight: 600;
     font-size: 3rem;
   }
   &:last-child {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 `;
 
 const LoggedText = styled.span`
+  display: block;
   cursor: pointer;
+  transition: transform 0.3s ease-in-out;
   &:hover {
     transform: translateY(-3px);
   }
-  transition: transform 0.3s ease-in-out;
 `;
 
 const LOGOUT_QUERY = gql`
