@@ -12,6 +12,7 @@ const Calendar = () => {
       format={formatStr}
       locale={cn ? zhCN : koKR}
       showDateInput={false}
+      showToday={false}
       renderFooter={() => <span>저장</span>}
     />
   );

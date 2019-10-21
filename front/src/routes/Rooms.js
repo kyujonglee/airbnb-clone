@@ -28,11 +28,11 @@ const ROOMS_QUERY = gql`
     findRooms {
       rating
       id
-      price
       content
       imgPath
       bedroom
       bed
+      title
       bathroom
       maximumGuest
     }
@@ -55,9 +55,11 @@ const Rooms = () => {
             <Room
               key={room.id}
               id={room.id}
-              price={room.price}
+              rating={room.rating}
               imgPath={room.imgPath}
               bed={room.bed}
+              title={room.title}
+              content={room.content}
               bathroom={room.bathroom}
               bedroom={room.bedroom}
             />
