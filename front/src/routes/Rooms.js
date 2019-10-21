@@ -4,6 +4,7 @@ import { gql } from 'apollo-boost';
 import Navbar from '../components/Navbar';
 import { useQuery } from 'react-apollo';
 import Room from '../components/Room';
+import Loader from '../components/Loader';
 
 const Container = styled.div`
   background-color: white;
@@ -42,7 +43,7 @@ const ROOMS_QUERY = gql`
 const Rooms = () => {
   const { data, loading, error } = useQuery(ROOMS_QUERY);
   if (error) return 'error';
-  if (loading) return 'loading';
+  if (loading) return <Loader />;
   const { findRooms: rooms } = data;
   return (
     rooms &&
