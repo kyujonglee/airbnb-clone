@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import Auth from '../routes/Auth';
 import Reservation from '../routes/Rooms';
+import Header from './Header';
 
 const LoggedIn = () => (
   <Switch>
@@ -17,7 +18,17 @@ const LoggedOut = () => (
 );
 
 const Routes = ({ isLoggedIn }) => {
-  return isLoggedIn ? <LoggedIn /> : <LoggedOut />;
+  return isLoggedIn ? (
+    <>
+      <Header isLoggedIn={isLoggedIn} />
+      <LoggedIn />
+    </>
+  ) : (
+    <>
+      <Header isLoggedIn={isLoggedIn} />
+      <LoggedOut />
+    </>
+  );
 };
 
 Routes.propTypes = {

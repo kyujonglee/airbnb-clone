@@ -39,14 +39,14 @@ const AuthContainer = () => {
 
   const signIn = () => {};
 
-  const onSubmit = async e => {
+  const onSubmit = e => {
     e.preventDefault();
     switch (action) {
       case 'login':
-        await login();
+        login();
         break;
       case 'signIn':
-        await signIn();
+        signIn();
         break;
       default:
     }
