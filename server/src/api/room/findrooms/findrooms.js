@@ -7,9 +7,14 @@ export default {
       const {
         Sequelize: { Op }
       } = db;
-      let { priceStart, priceEnd, checkIn, checkOut } = args;
-      if (checkIn) checkIn = new Date(checkIn);
-      if (checkOut) checkOut = new Date(checkOut);
+      const { priceStart, priceEnd, checkIn, checkOut } = args;
+      let _checkIn, _checkOut;
+      if (checkIn) {
+        _checkIn = new Date(checkIn);
+      }
+      if (checkOut) {
+        _checkOut = new Date(checkOut);
+      }
       try {
         let priceOptions = {};
         let dateOptions = {};
@@ -18,14 +23,34 @@ export default {
             price: { [Op.between]: [priceStart, priceEnd] }
           };
         }
-        if (checkIn && checkOut) {
+        if (_checkIn && _checkOut) {
           dateOptions = {
-            [Op.not]: {
-              [Op.or]: [
-                { checkOut: { [Op.lt]: checkIn } },
-                { checkIn: { [Op.gt]: checkOut } }
-              ]
-            }
+            [Op.or]: [
+              {
+                [Op.and]: [
+                  { checkOut: { [Op.lte]: _checkOut } },
+                  { checkIn: { [Op.gte]: _checkIn } }
+                ]
+              },
+              {
+                [Op.and]: [
+                  { checkOut: { [Op.gte]: _checkOut } },
+                  { checkIn: { [Op.lte]: _checkIn } }
+                ]
+              },
+              {
+                [Op.and]: [
+                  { checkOut: { [Op.gte]: _checkOut } },
+                  { checkIn: { [Op.between]: [_checkIn, _checkOut] } }
+                ]
+              },
+              {
+                [Op.and]: [
+                  { checkOut: { [Op.between]: [_checkIn, _checkOut] } },
+                  { checkIn: { [Op.lte]: _checkIn } }
+                ]
+              }
+            ]
           };
         }
         const rooms = await Room.findAll({
@@ -39,7 +64,11 @@ export default {
           where: priceOptions,
           order: [['rating', 'desc']]
         });
-        return rooms.filter(room => room.reservations.length === 0);
+        if (_checkIn && _checkOut) {
+          return rooms.filter(room => room.reservations.length === 0);
+        } else {
+          return rooms;
+        }
       } catch (error) {
         return [];
       }

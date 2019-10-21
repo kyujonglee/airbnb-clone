@@ -5,7 +5,6 @@ import {
   ReservationPerson,
   Person
 } from '../../../models';
-import { isAuthenticate } from '../../../middlewares';
 
 export default {
   Query: {
