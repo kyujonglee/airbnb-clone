@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import Auth from '../routes/Auth';
-import Rooms from '../routes/Rooms/Rooms';
+import Rooms from '../routes/Rooms';
 import Header from './Header';
 
 const LoggedIn = () => (

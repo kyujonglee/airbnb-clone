@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import GlobalStyles from '../styles/globalStyles';
 import theme from '../styles/theme';
 import Routes from './Routes';
-import { RoomProvider } from '../routes/Rooms/RoomsContext';
+import { RoomProvider } from '../contexts/RoomsContext';
 
 const QUERY = gql`
   {

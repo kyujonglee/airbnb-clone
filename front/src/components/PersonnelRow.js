@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { usePersonnelDispatch } from '../contexts/PersonnelContext';
 
 const Container = styled.div`
   width: 100%;
@@ -57,22 +58,7 @@ const Age = styled.span`
   font-size: 0.8rem;
 `;
 
-const PersonnelRow = ({
-  text,
-  age,
-  value,
-  setValue,
-  onDecrease,
-  onIncrease,
-  max
-}) => {
-  const decrease = () => {
-    if (value > 0) setValue(value - 1);
-  };
-  const increase = () => {
-    if(value >= max) return;
-    setValue(value + 1);
-  };
+const PersonnelRow = ({ text, age, value, increase, decrease }) => {
   return (
     <Container>
       <TextBox>
@@ -80,14 +66,11 @@ const PersonnelRow = ({
         {age && <Age>{age}</Age>}
       </TextBox>
       <Buttons>
-        <Button
-          onClick={onDecrease || decrease}
-          value={value}
-          disabled={value === 0}>
+        <Button onClick={decrease} value={value} disabled={value === 0}>
           -
         </Button>
         <Text>{value || 0}+</Text>
-        <Button onClick={onIncrease || increase}>+</Button>
+        <Button onClick={increase}>+</Button>
       </Buttons>
     </Container>
   );

@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 import Modal from './Modal';
 import Personnel from './Personnel';
+import { usePersonnelState } from '../contexts/PersonnelContext';
 
 const Tabs = styled.ul`
   display: flex;
@@ -32,7 +33,7 @@ const Tab = styled.span`
     border-color: white;
   }
   ${props =>
-    props.click &&
+    props.active &&
     css`
       background-color: ${props.theme.airbnbGreen};
       color: white;
@@ -50,9 +51,8 @@ const TabBox = styled.li`
 `;
 
 const Navbar = () => {
-  const [adult, setAdult] = useState(0);
-  const [child, setChild] = useState(0);
-  const [baby, setBaby] = useState(0);
+  const { adult, child, baby } = usePersonnelState();
+  const isPersonnelSelected = () => !(adult === 0 && child === 0 && baby === 0);
   const initState = {
     date: false,
     personnel: false,
@@ -63,34 +63,30 @@ const Navbar = () => {
     <Tabs>
       <TabBox>
         <Tab
-          click={click.date}
+          active={click.date}
           onClick={() => setClick({ ...initState, date: true })}>
           날짜
         </Tab>
       </TabBox>
       <TabBox>
         <Tab
-          click={click.personnel}
+          active={click.personnel || isPersonnelSelected()}
           onClick={() => setClick({ ...initState, personnel: true })}>
           {adult === 0 && child === 0 && baby === 0 && '인원'}
           {(adult !== 0 || child !== 0) && `게스트 ${adult + child}명`}
           {baby !== 0 && ` 유아 ${baby}명`}
         </Tab>
-        <Modal left={'103px'} top={'110px'} show={click.personnel} onClick={() => setClick(initState)}>
-          <Personnel
-            adult={adult}
-            setAdult={setAdult}
-            child={child}
-            setChild={setChild}
-            baby={baby}
-            setBaby={setBaby}
-            click={click.personnel}
-          />
+        <Modal
+          left={'103px'}
+          top={'110px'}
+          show={click.personnel}
+          onClick={() => setClick(initState)}>
+          <Personnel click={click.personnel} close={() => setClick(initState)}/>
         </Modal>
       </TabBox>
       <TabBox>
         <Tab
-          click={click.price}
+          active={click.price}
           onClick={() => setClick({ ...initState, price: true })}>
           가격
         </Tab>

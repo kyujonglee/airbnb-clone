@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PersonnelRow from './PersonnelRow';
+import {
+  usePersonnelState,
+  usePersonnelDispatch
+} from '../contexts/PersonnelContext';
 
 const Container = styled.div`
   width: 400px;
@@ -31,53 +35,76 @@ const Text = styled.span`
   }
 `;
 
-const Personnel = ({
-  adult,
-  setAdult,
-  child,
-  setChild,
-  baby,
-  setBaby
-}) => {
-  const isChildAndBaby = () => child !== 0 || baby !== 0;
-  const onIncrease = setValue => {
-    if (adult === 0) {
-      setAdult(adult + 1);
-    }
-    setValue(props => (props >= 5 ? props : props + 1));
+const Personnel = ({ close }) => {
+  const { adult, child, baby } = usePersonnelState();
+  const dispatch = usePersonnelDispatch();
+  const increaseAdult = () => {
+    dispatch({
+      type: 'INCREASE_ADULT'
+    });
   };
-  const onDecrease = () => {
-    if (adult === 1 && isChildAndBaby()) return;
-    setAdult(adult - 1);
+  const decreaseAdult = () => {
+    dispatch({
+      type: 'DECREASE_ADULT'
+    });
   };
+
+  const increaseChild = () => {
+    dispatch({
+      type: 'INCREASE_CHILD'
+    });
+  };
+
+  const decreaseChild = () => {
+    dispatch({
+      type: 'DECREASE_CHILD'
+    });
+  };
+
+  const increaseBaby = () => {
+    dispatch({
+      type: 'INCREASE_BABY'
+    });
+  };
+
+  const decreaseBaby = () => {
+    dispatch({
+      type: 'DECREASE_BABY'
+    });
+  };
+
+  const reset = () => {
+    dispatch({
+      type: 'RESET'
+    });
+  };
+
   return (
     <Container>
       <PersonnelRow
         text={'성인'}
         value={adult}
-        setValue={setAdult}
-        max={16}
-        onDecrease={onDecrease}
+        name={'adult'}
+        increase={increaseAdult}
+        decrease={decreaseAdult}
       />
       <PersonnelRow
         text={'어린이'}
         age={'2~12세'}
         value={child}
-        setValue={setChild}
-        max={5}
-        onIncrease={onIncrease.bind(null, setChild)}
+        increase={increaseChild}
+        decrease={decreaseChild}
       />
       <PersonnelRow
         text={'유아'}
         age={'2세 미만'}
         value={baby}
-        setValue={setBaby}
-        max={5}
-        onIncrease={onIncrease.bind(null, setBaby)}
+        increase={increaseBaby}
+        decrease={decreaseBaby}
       />
       <Row>
-        <Text>삭제</Text>
-        <Text>저장</Text>
+        <Text onClick={reset}>{adult + child + baby === 0 || '삭제'}</Text>
+        <Text onClick={close}>저장</Text>
       </Row>
     </Container>
   );
