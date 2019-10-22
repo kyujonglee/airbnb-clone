@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import PersonnelRow from './PersonnelRow';
 import {
@@ -38,46 +38,46 @@ const Text = styled.span`
 const Personnel = ({ close }) => {
   const { adult, child, baby } = usePersonnelState();
   const dispatch = usePersonnelDispatch();
-  const increaseAdult = () => {
+  const increaseAdult = useCallback(() => {
     dispatch({
       type: 'INCREASE_ADULT'
     });
-  };
-  const decreaseAdult = () => {
+  }, [dispatch]);
+  const decreaseAdult = useCallback(() => {
     dispatch({
       type: 'DECREASE_ADULT'
     });
-  };
+  }, [dispatch]);
 
-  const increaseChild = () => {
+  const increaseChild = useCallback(() => {
     dispatch({
       type: 'INCREASE_CHILD'
     });
-  };
+  }, [dispatch]);
 
-  const decreaseChild = () => {
+  const decreaseChild = useCallback(() => {
     dispatch({
       type: 'DECREASE_CHILD'
     });
-  };
+  }, [dispatch]);
 
-  const increaseBaby = () => {
+  const increaseBaby = useCallback(() => {
     dispatch({
       type: 'INCREASE_BABY'
     });
-  };
+  }, [dispatch]);
 
-  const decreaseBaby = () => {
+  const decreaseBaby = useCallback(() => {
     dispatch({
       type: 'DECREASE_BABY'
     });
-  };
+  }, [dispatch]);
 
-  const reset = () => {
+  const reset = useCallback(() => {
     dispatch({
       type: 'RESET'
     });
-  };
+  }, [dispatch]);
 
   return (
     <Container>
@@ -110,4 +110,4 @@ const Personnel = ({ close }) => {
   );
 };
 
-export default Personnel;
+export default React.memo(Personnel);

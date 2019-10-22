@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 import Modal from './Modal';
@@ -59,6 +59,7 @@ const Navbar = () => {
     price: false
   };
   const [click, setClick] = useState(initState);
+  const nonClick = useCallback(() => setClick({ ...initState }), [initState]);
   return (
     <Tabs>
       <TabBox>
@@ -80,8 +81,8 @@ const Navbar = () => {
           left={'103px'}
           top={'110px'}
           show={click.personnel}
-          onClick={() => setClick(initState)}>
-          <Personnel click={click.personnel} close={() => setClick(initState)}/>
+          onClick={nonClick}>
+          <Personnel click={click.personnel} close={nonClick} />
         </Modal>
       </TabBox>
       <TabBox>
