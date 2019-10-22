@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { usePersonnelDispatch } from '../contexts/PersonnelContext';
 
 const Container = styled.div`
   width: 100%;
@@ -80,4 +79,4 @@ PersonnelRow.propTypes = {
   text: PropTypes.string.isRequired
 };
 
-export default PersonnelRow;
+export default React.memo(PersonnelRow);

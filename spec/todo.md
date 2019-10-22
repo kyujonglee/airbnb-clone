@@ -16,8 +16,11 @@
 - [ ] Pagination?? Sequelize
 - [x] 필요한 api 만들기!( 검색 api 등등 )
 - [x] 검색 api
+- [ ] 예약시 날짜 체크하는 로직 넣기
 
 ### frontend
 
 - [x] Apollo settings
 - [x] 로그인 페이지
+- [ ] Loader 컴포넌트 구현
+- [ ] 
