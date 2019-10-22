@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import StarRatingComponent from 'react-star-rating-component';
 import Button from './Button';
 
 const Container = styled.div`
@@ -49,6 +48,16 @@ const Content = styled.span`
   color: rgba(0, 0, 0, 0.7);
 `;
 
+const RatingBox = styled.div``;
+
+const Star = styled.span`
+  color: ${props => props.theme.airbnbGreen};
+`;
+
+const Rating = styled.span`
+  color: rgba(0, 0, 0, 0.7);
+`;
+
 const Room = ({ title, content, rating, imgPath, bed, bathroom, bedroom }) => {
   return (
     <Container>
@@ -64,16 +73,10 @@ const Room = ({ title, content, rating, imgPath, bed, bathroom, bedroom }) => {
           <Content>{content}</Content>
         </Row>
         <Row>
-          <StarRatingComponent
-            editing={false}
-            starCount={5}
-            value={rating}
-            renderStarIcon={() => <span>★</span>}
-            starColor={
-              '#914569'
-            } /* color of selected icons, default `#ffb400` */
-            emptyStarColor={'#ced4da'}
-          />
+          <RatingBox>
+            <Star>★</Star>
+            <Rating>({rating})</Rating>
+          </RatingBox>
           <Button text={'예약'} />
         </Row>
       </Column>

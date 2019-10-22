@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { gql } from 'apollo-boost';
-import Navbar from '../components/Navbar';
+import Navbar from '../../components/Navbar';
 import { useQuery } from 'react-apollo';
-import Room from '../components/Room';
-import Loader from '../components/Loader';
+import Room from '../../components/Room';
+import Loader from '../../components/Loader';
+import { useRoomState } from './RoomsContext';
 
 const Container = styled.div`
   background-color: white;
@@ -25,8 +26,18 @@ const RoomContainer = styled.div`
 `;
 
 const ROOMS_QUERY = gql`
-  {
-    findRooms {
+  query findRooms(
+    $checkIn: String
+    $checkOut: String
+    $priceEnd: Int
+    $priceStart: Int
+  ) {
+    findRooms(
+      checkIn: $checkIn
+      checkOut: $checkOut
+      priceStart: $priceStart
+      priceEnd: $priceEnd
+    ) {
       rating
       id
       content
@@ -41,7 +52,10 @@ const ROOMS_QUERY = gql`
 `;
 
 const Rooms = () => {
-  const { data, loading, error } = useQuery(ROOMS_QUERY);
+  const state = useRoomState();
+  const { data, loading, error } = useQuery(ROOMS_QUERY, {
+    variables: { ...state }
+  });
   if (error) return 'error';
   if (loading) return <Loader />;
   const { findRooms: rooms } = data;

@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import GlobalStyles from '../styles/globalStyles';
 import theme from '../styles/theme';
 import Routes from './Routes';
+import { RoomProvider } from '../routes/Rooms/RoomsContext';
 
 const QUERY = gql`
   {
@@ -21,13 +22,13 @@ function App() {
   } = useQuery(QUERY);
   return (
     <ThemeProvider theme={theme}>
-      <>
+      <RoomProvider>
         <GlobalStyles />
         <Router>
           <Routes isLoggedIn={isLoggedIn} />
         </Router>
         <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
-      </>
+      </RoomProvider>
     </ThemeProvider>
   );
 }

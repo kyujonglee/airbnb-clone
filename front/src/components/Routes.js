@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import Auth from '../routes/Auth';
-import Reservation from '../routes/Rooms';
+import Rooms from '../routes/Rooms/Rooms';
 import Header from './Header';
 
 const LoggedIn = () => (
   <Switch>
-    <Route path="/" component={Reservation} />
+    <Route path="/" component={Rooms} />
   </Switch>
 );
 
