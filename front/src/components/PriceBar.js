@@ -70,7 +70,7 @@ const PriceBar = ({ openDate, close }) => {
     setValue(value);
   };
 
-  const reset = () => setValue(initValue);
+  const reset = () => setValue({ min: MIN_PRICE, max: MAX_PRICE });
   const save = () => {
     dispatch({
       type: 'SET_PRICE',

@@ -8,3 +8,8 @@ export const parseCookies = cookies => {
     return acc;
   }, {});
 };
+
+export const parsePrice = price => {
+  price = String(price);
+  return price.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+};

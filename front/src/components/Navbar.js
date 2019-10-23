@@ -6,6 +6,7 @@ import Personnel from './Personnel';
 import { usePersonnelState } from '../contexts/PersonnelContext';
 import PriceBar from './PriceBar';
 import { useRoomState } from '../contexts/RoomsContext';
+import { parsePrice } from '../util';
 
 const Tabs = styled.ul`
   position: fixed;
@@ -103,9 +104,9 @@ const Navbar = () => {
           onClick={() => setClick({ ...initState, price: true })}>
           {(MAX_PRICE !== priceEnd &&
             MIN_PRICE !== priceStart &&
-            `₩${priceStart} - ₩${priceEnd}`) ||
-            (MAX_PRICE !== priceEnd && `최대 ₩ ${priceEnd}`) ||
-            (MIN_PRICE !== priceStart && `₩ ${priceStart}+`) ||
+            `₩${parsePrice(priceStart)} - ₩${parsePrice(priceEnd)}`) ||
+            (MAX_PRICE !== priceEnd && `최대 ₩ ${parsePrice(priceEnd)}`) ||
+            (MIN_PRICE !== priceStart && `₩ ${parsePrice(priceStart)}+`) ||
             '가격'}
         </Tab>
         <Modal
