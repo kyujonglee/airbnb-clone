@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { gql } from 'apollo-boost';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar/index.js';
 import { useQuery } from 'react-apollo';
 import Room from '../components/Room';
 import Loader from '../components/Loader';
 import { useRoomState } from '../contexts/RoomsContext';
-import { PersonnelProvider } from '../contexts/PersonnelContext';
 
 const Container = styled.div`
   background-color: white;
@@ -73,9 +72,7 @@ const Rooms = () => {
     rooms &&
     rooms.length && (
       <Container>
-        <PersonnelProvider>
-          <Navbar />
-        </PersonnelProvider>
+        <Navbar />
         <RoomContainer>
           <Title>숙소 {rooms.length}개 </Title>
           {rooms.map(room => (

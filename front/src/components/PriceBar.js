@@ -55,8 +55,7 @@ const ButtonS = styled.span`
 `;
 
 const PriceBar = ({ openDate, close }) => {
-  // Todo : 가격이 선택되지 않았을 때는 가격선택 화면 보여주기
-  const { priceStart, priceEnd } = useRoomState();
+  const { priceStart, priceEnd, checkIn, checkOut } = useRoomState();
   const dispatch = useRoomDispatch();
   const MIN_PRICE = 0;
   const MAX_PRICE = 1000000;
@@ -81,30 +80,32 @@ const PriceBar = ({ openDate, close }) => {
   };
   return (
     <Container>
-      {(!priceStart || !priceEnd) && false && (
+      {checkIn && checkOut ? (
+        <>
+          <InputRangeWrapper>
+            <InputRange
+              draggableTrack
+              maxValue={MAX_PRICE}
+              minValue={MIN_PRICE}
+              value={value}
+              step={10}
+              formatLabel={value => `${value}원`}
+              onChange={onChange}
+            />
+          </InputRangeWrapper>
+          <Row>
+            <ButtonS onClick={reset}>
+              {(value.min !== MIN_PRICE || value.max !== MAX_PRICE) && '삭제'}
+            </ButtonS>
+            <ButtonS onClick={save}>저장</ButtonS>
+          </Row>
+        </>
+      ) : (
         <Wrapper>
           <Text>요금을 확인하려면 가격을 선택하세요</Text>
           <Button text={'날짜 입력'} color={'airbnbGreen'} onClick={openDate} />
         </Wrapper>
       )}
-      {/* {priceStart && priceEnd && '컴포넌트 자리'} */}
-      <InputRangeWrapper>
-        <InputRange
-          draggableTrack
-          maxValue={MAX_PRICE}
-          minValue={MIN_PRICE}
-          value={value}
-          step={10}
-          formatLabel={value => `${value}원`}
-          onChange={onChange}
-        />
-      </InputRangeWrapper>
-      <Row>
-        <ButtonS onClick={reset}>
-          {(value.min !== MIN_PRICE || value.max !== MAX_PRICE) && '삭제'}
-        </ButtonS>
-        <ButtonS onClick={save}>저장</ButtonS>
-      </Row>
     </Container>
   );
 };

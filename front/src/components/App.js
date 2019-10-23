@@ -9,6 +9,7 @@ import GlobalStyles from '../styles/globalStyles';
 import theme from '../styles/theme';
 import Routes from './Routes';
 import { RoomProvider } from '../contexts/RoomsContext';
+import { PersonnelProvider } from '../contexts/PersonnelContext';
 
 const QUERY = gql`
   {
@@ -23,11 +24,13 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <RoomProvider>
-        <GlobalStyles />
-        <Router>
-          <Routes isLoggedIn={isLoggedIn} />
-        </Router>
-        <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
+        <PersonnelProvider>
+          <GlobalStyles />
+          <Router>
+            <Routes isLoggedIn={isLoggedIn} />
+          </Router>
+          <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
+        </PersonnelProvider>
       </RoomProvider>
     </ThemeProvider>
   );

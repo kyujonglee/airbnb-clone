@@ -1,12 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
-import Modal from './Modal';
-import Personnel from './Personnel';
-import { usePersonnelState } from '../contexts/PersonnelContext';
-import PriceBar from './PriceBar';
-import { useRoomState } from '../contexts/RoomsContext';
-import { parsePrice } from '../util';
+import Calendar from '../Calendar';
+import Modal from '../Modal';
+import Personnel from '../Personnel';
+import PriceBar from '../PriceBar';
+import { usePersonnelState } from '../../contexts/PersonnelContext';
 
 const Tabs = styled.ul`
   position: fixed;
@@ -58,32 +57,33 @@ const TabBox = styled.li`
   }
 `;
 
-const Navbar = () => {
+const NavbarPresenter = ({
+  date,
+  setDate,
+  printPrice,
+  click,
+  nonClick,
+  printDate,
+  clickDate,
+  clickPersonnel,
+  clickPrice,
+  activeDate,
+  activePersonnel,
+  activePrice
+}) => {
   const { adult, child, baby } = usePersonnelState();
-  const isPersonnelSelected = () => !(adult === 0 && child === 0 && baby === 0);
-  const initState = {
-    date: false,
-    personnel: false,
-    price: false
-  };
-  const [click, setClick] = useState(initState);
-  const nonClick = useCallback(() => setClick({ ...initState }), [initState]);
-  const { priceStart, priceEnd } = useRoomState();
-  const MIN_PRICE = 0;
-  const MAX_PRICE = 1000000;
   return (
     <Tabs>
       <TabBox>
-        <Tab
-          active={click.date}
-          onClick={() => setClick({ ...initState, date: true })}>
-          날짜
+        <Tab active={activeDate} onClick={clickDate}>
+          {printDate()}
         </Tab>
+        <Modal show={click.date} onClick={nonClick} top={'110px'} left={'25px'}>
+          <Calendar close={nonClick} date={date} setDate={setDate} />
+        </Modal>
       </TabBox>
       <TabBox>
-        <Tab
-          active={click.personnel || isPersonnelSelected()}
-          onClick={() => setClick({ ...initState, personnel: true })}>
+        <Tab active={activePersonnel} onClick={clickPersonnel}>
           {adult === 0 && child === 0 && baby === 0 && '인원'}
           {(adult !== 0 || child !== 0) && `게스트 ${adult + child}명`}
           {baby !== 0 && ` 유아 ${baby}명`}
@@ -97,31 +97,19 @@ const Navbar = () => {
         </Modal>
       </TabBox>
       <TabBox>
-        <Tab
-          active={
-            priceStart !== MIN_PRICE || priceEnd !== MAX_PRICE || click.price
-          }
-          onClick={() => setClick({ ...initState, price: true })}>
-          {(MAX_PRICE !== priceEnd &&
-            MIN_PRICE !== priceStart &&
-            `₩${parsePrice(priceStart)} - ₩${parsePrice(priceEnd)}`) ||
-            (MAX_PRICE !== priceEnd && `최대 ₩ ${parsePrice(priceEnd)}`) ||
-            (MIN_PRICE !== priceStart && `₩ ${parsePrice(priceStart)}+`) ||
-            '가격'}
+        <Tab active={activePrice} onClick={clickPrice}>
+          {printPrice()}
         </Tab>
         <Modal
           show={click.price}
           onClick={nonClick}
           top={'110px'}
           left={'181px'}>
-          <PriceBar
-            openDate={() => setClick({ ...initState, date: true })}
-            close={nonClick}
-          />
+          <PriceBar openDate={clickDate} close={nonClick} />
         </Modal>
       </TabBox>
     </Tabs>
   );
 };
 
-export default Navbar;
+export default NavbarPresenter;

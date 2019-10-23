@@ -13,3 +13,7 @@ export const parsePrice = price => {
   price = String(price);
   return price.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 };
+
+export const parseDate = date => {
+  return `${date.getMonth()+1}월 ${date.getDate()}일`
+}

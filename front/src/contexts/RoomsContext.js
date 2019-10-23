@@ -1,8 +1,8 @@
 import React, { useReducer, createContext, useContext } from 'react';
 
 const initState = {
-  checkIn: '',
-  checkOut: '',
+  checkIn: null,
+  checkOut: null,
   priceStart: 0,
   priceEnd: 1000000
 };
