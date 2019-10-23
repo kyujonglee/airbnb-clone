@@ -49,27 +49,17 @@ const Personnel = ({ close }) => {
     });
   }, [dispatch]);
 
-  const increaseChild = useCallback(() => {
+  const increaseLittle = useCallback(name => {
     dispatch({
-      type: 'INCREASE_CHILD'
+      type: 'INCREASE_LITTLE',
+      name
     });
   }, [dispatch]);
 
-  const decreaseChild = useCallback(() => {
+  const decreaseLittle = useCallback(name => {
     dispatch({
-      type: 'DECREASE_CHILD'
-    });
-  }, [dispatch]);
-
-  const increaseBaby = useCallback(() => {
-    dispatch({
-      type: 'INCREASE_BABY'
-    });
-  }, [dispatch]);
-
-  const decreaseBaby = useCallback(() => {
-    dispatch({
-      type: 'DECREASE_BABY'
+      type: 'DECREASE_LITTLE',
+      name
     });
   }, [dispatch]);
 
@@ -92,15 +82,15 @@ const Personnel = ({ close }) => {
         text={'어린이'}
         age={'2~12세'}
         value={child}
-        increase={increaseChild}
-        decrease={decreaseChild}
+        increase={increaseLittle.bind(null, 'child')}
+        decrease={decreaseLittle.bind(null, 'child')}
       />
       <PersonnelRow
         text={'유아'}
         age={'2세 미만'}
         value={baby}
-        increase={increaseBaby}
-        decrease={decreaseBaby}
+        increase={increaseLittle.bind(null, 'baby')}
+        decrease={decreaseLittle.bind(null, 'baby')}
       />
       <Row>
         <Text onClick={reset}>{adult + child + baby === 0 || '삭제'}</Text>

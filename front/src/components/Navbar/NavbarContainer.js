@@ -12,7 +12,6 @@ const NavbarContainer = () => {
     price: false
   };
   const [click, setClick] = useState(initState);
-  const nonClick = useCallback(() => setClick({ ...initState }), [initState]);
   const { checkIn, checkOut, priceStart, priceEnd } = useRoomState();
   const MIN_PRICE = 0;
   const MAX_PRICE = 1000000;
@@ -41,9 +40,15 @@ const NavbarContainer = () => {
     return '가격';
   };
 
-  const clickDate = () => setClick({ ...initState, date: true });
-  const clickPersonnel = () => setClick({ ...initState, personnel: true });
-  const clickPrice = () => setClick({ ...initState, price: true });
+  const pricePersonnel = () => {
+    let str = '';
+    if (adult !== 0 || child !== 0) str += `게스트 ${adult + child}명`;
+    if (baby !== 0) str += ` 유아 ${baby}명`;
+    return str || '인원';
+  };
+
+  const clickTarget = name => setClick({ ...initState, [name]: true });
+  const nonClick = useCallback(() => setClick({ ...initState }), [initState]);
   const activeDate =
     date.startDate || date.endDate || checkIn || checkOut || click.date;
   const activePersonnel =
@@ -56,10 +61,11 @@ const NavbarContainer = () => {
       setDate={setDate}
       printPrice={printPrice}
       printDate={printDate}
+      pricePersonnel={pricePersonnel}
       click={click}
-      clickDate={clickDate}
-      clickPersonnel={clickPersonnel}
-      clickPrice={clickPrice}
+      clickDate={clickTarget.bind(null, 'date')}
+      clickPersonnel={clickTarget.bind(null, 'personnel')}
+      clickPrice={clickTarget.bind(null, 'price')}
       nonClick={nonClick}
       activeDate={activeDate}
       activePersonnel={activePersonnel}

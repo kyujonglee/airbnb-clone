@@ -5,7 +5,6 @@ import Calendar from '../Calendar';
 import Modal from '../Modal';
 import Personnel from '../Personnel';
 import PriceBar from '../PriceBar';
-import { usePersonnelState } from '../../contexts/PersonnelContext';
 
 const Tabs = styled.ul`
   position: fixed;
@@ -60,10 +59,11 @@ const TabBox = styled.li`
 const NavbarPresenter = ({
   date,
   setDate,
+  printDate,
+  pricePersonnel,
   printPrice,
   click,
   nonClick,
-  printDate,
   clickDate,
   clickPersonnel,
   clickPrice,
@@ -71,26 +71,31 @@ const NavbarPresenter = ({
   activePersonnel,
   activePrice
 }) => {
-  const { adult, child, baby } = usePersonnelState();
+  const HEIGHT = '110px';
+  const DATE_LEFT = '25px';
+  const PERSONNEL_LEFT = '103px';
+  const PRICE_LEFT = '181px';
   return (
     <Tabs>
       <TabBox>
         <Tab active={activeDate} onClick={clickDate}>
           {printDate()}
         </Tab>
-        <Modal show={click.date} onClick={nonClick} top={'110px'} left={'25px'}>
+        <Modal
+          show={click.date}
+          onClick={nonClick}
+          top={HEIGHT}
+          left={DATE_LEFT}>
           <Calendar close={nonClick} date={date} setDate={setDate} />
         </Modal>
       </TabBox>
       <TabBox>
         <Tab active={activePersonnel} onClick={clickPersonnel}>
-          {adult === 0 && child === 0 && baby === 0 && '인원'}
-          {(adult !== 0 || child !== 0) && `게스트 ${adult + child}명`}
-          {baby !== 0 && ` 유아 ${baby}명`}
+          {pricePersonnel()}
         </Tab>
         <Modal
-          left={'103px'}
-          top={'110px'}
+          left={PERSONNEL_LEFT}
+          top={HEIGHT}
           show={click.personnel}
           onClick={nonClick}>
           <Personnel click={click.personnel} close={nonClick} />
@@ -103,8 +108,8 @@ const NavbarPresenter = ({
         <Modal
           show={click.price}
           onClick={nonClick}
-          top={'110px'}
-          left={'181px'}>
+          top={HEIGHT}
+          left={PRICE_LEFT}>
           <PriceBar openDate={clickDate} close={nonClick} />
         </Modal>
       </TabBox>

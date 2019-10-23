@@ -25,55 +25,29 @@ const decreaseAdult = state => {
   return { ...state, adult: adult - 1 };
 };
 
-const increaseChild = state => {
-  const { child, adult } = state;
-  if (child >= CHILD_MAX) return state;
+const increaseLittle = (state, name) => {
+  const { adult } = state;
+  const target = state[name];
+  if (target >= CHILD_MAX) return state;
   if (adult === 0) {
     return {
       ...state,
       adult: 1,
-      child: child + 1
+      [name]: target + 1
     };
   }
   return {
     ...state,
-    child: child + 1
+    [name]: target + 1
   };
 };
 
-const decreaseChild = state => {
-  const { child } = state;
-  if (child > 0) {
+const decreaseLittle = (state, name) => {
+  const target = state[name];
+  if (target > 0) {
     return {
       ...state,
-      child: child - 1
-    };
-  }
-  return state;
-};
-
-const increaseBaby = state => {
-  const { baby, adult } = state;
-  if (baby >= CHILD_MAX) return state;
-  if (adult === 0) {
-    return {
-      ...state,
-      adult: 1,
-      baby: baby + 1
-    };
-  }
-  return {
-    ...state,
-    baby: baby + 1
-  };
-};
-
-const decreaseBaby = state => {
-  const { baby } = state;
-  if (baby > 0) {
-    return {
-      ...state,
-      baby: baby - 1
+      [name]: target - 1
     };
   }
   return state;
@@ -85,14 +59,10 @@ const reducer = (state, action) => {
       return increaseAdult(state);
     case 'DECREASE_ADULT':
       return decreaseAdult(state);
-    case 'INCREASE_CHILD':
-      return increaseChild(state);
-    case 'DECREASE_CHILD':
-      return decreaseChild(state);
-    case 'INCREASE_BABY':
-      return increaseBaby(state);
-    case 'DECREASE_BABY':
-      return decreaseBaby(state);
+    case 'INCREASE_LITTLE':
+      return increaseLittle(state, action.name);
+    case 'DECREASE_LITTTLE':
+      return decreaseLittle(state, action.name);
     case 'RESET':
       return initState;
     default:
