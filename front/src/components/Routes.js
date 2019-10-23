@@ -25,7 +25,6 @@ const Routes = ({ isLoggedIn }) => {
     </>
   ) : (
     <>
-      <Header isLoggedIn={isLoggedIn} />
       <LoggedOut />
     </>
   );

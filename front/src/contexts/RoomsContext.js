@@ -4,7 +4,7 @@ const initState = {
   checkIn: '',
   checkOut: '',
   priceStart: 0,
-  priceEnd: 10000000
+  priceEnd: 1000000
 };
 
 const reducer = (state, action) => {

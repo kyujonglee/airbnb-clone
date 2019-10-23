@@ -12,6 +12,7 @@ const Container = styled.div`
   background-color: white;
   width: 100%;
   min-height: calc(100vh - 6vh);
+  padding-top: 6vh;
 `;
 
 const Title = styled.span`
@@ -22,6 +23,7 @@ const Title = styled.span`
 
 const RoomContainer = styled.div`
   padding: 1.5rem;
+  padding-top: 6vh;
   display: flex;
   flex-direction: column;
 `;
@@ -58,7 +60,14 @@ const Rooms = () => {
     variables: { ...state }
   });
   if (error) return 'error';
-  if (loading) return <Loader />;
+  if (loading)
+    return (
+      <Container>
+        <RoomContainer>
+          <Loader />
+        </RoomContainer>
+      </Container>
+    );
   const { findRooms: rooms } = data;
   return (
     rooms &&

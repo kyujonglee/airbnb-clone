@@ -4,14 +4,21 @@ import { darken } from 'polished';
 import Modal from './Modal';
 import Personnel from './Personnel';
 import { usePersonnelState } from '../contexts/PersonnelContext';
+import PriceBar from './PriceBar';
+import { useRoomState } from '../contexts/RoomsContext';
 
 const Tabs = styled.ul`
+  position: fixed;
+  top: 6vh;
+  left: 0;
+  width: 100%;
   display: flex;
   height: 5vh;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0.3rem;
   padding-left: 1.5rem;
   align-items: center;
+  background-color: white;
 `;
 
 const Tab = styled.span`
@@ -60,6 +67,9 @@ const Navbar = () => {
   };
   const [click, setClick] = useState(initState);
   const nonClick = useCallback(() => setClick({ ...initState }), [initState]);
+  const { priceStart, priceEnd } = useRoomState();
+  const MIN_PRICE = 0;
+  const MAX_PRICE = 1000000;
   return (
     <Tabs>
       <TabBox>
@@ -87,10 +97,27 @@ const Navbar = () => {
       </TabBox>
       <TabBox>
         <Tab
-          active={click.price}
+          active={
+            priceStart !== MIN_PRICE || priceEnd !== MAX_PRICE || click.price
+          }
           onClick={() => setClick({ ...initState, price: true })}>
-          가격
+          {(MAX_PRICE !== priceEnd &&
+            MIN_PRICE !== priceStart &&
+            `₩${priceStart} - ₩${priceEnd}`) ||
+            (MAX_PRICE !== priceEnd && `최대 ₩ ${priceEnd}`) ||
+            (MIN_PRICE !== priceStart && `₩ ${priceStart}+`) ||
+            '가격'}
         </Tab>
+        <Modal
+          show={click.price}
+          onClick={nonClick}
+          top={'110px'}
+          left={'181px'}>
+          <PriceBar
+            openDate={() => setClick({ ...initState, date: true })}
+            close={nonClick}
+          />
+        </Modal>
       </TabBox>
     </Tabs>
   );

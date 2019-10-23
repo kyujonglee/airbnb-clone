@@ -7,9 +7,14 @@ import { useMutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0%;
+  z-index: 1000;
   width: 100%;
   height: 6vh;
-  color: white;
+  color: rgba(0, 0, 0, 0.7);
+  background-color: #F7F7F7;
 `;
 
 const Container = styled.div`
@@ -29,6 +34,7 @@ const Column = styled.div`
   &:first-child {
     font-weight: 600;
     font-size: 3rem;
+    color: ${props => props.theme.airbnbRed};
   }
   &:last-child {
     font-size: 1.3rem;

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
-  display: ${props => (props.show ? 'block' : 'none')};
   position: fixed;
   top: 0px;
   left: 0px;
@@ -16,6 +15,7 @@ const Wrapper = styled.div`
       justify-content: center;
       align-items: center;
     `}
+    display: ${props => (props.show ? 'flex' : 'none')};
 `;
 
 const Overlay = styled.div`

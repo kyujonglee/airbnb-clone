@@ -4,7 +4,7 @@ import { FaAirbnb } from 'react-icons/fa';
 
 const Container = styled.div`
   width: 100%;
-  min-height: 5vh;
+  min-height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;

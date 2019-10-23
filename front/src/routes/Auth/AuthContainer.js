@@ -27,7 +27,7 @@ const AuthContainer = () => {
           data: { createToken: token }
         } = await createTokenMutation();
         await loginMutation({ variables: { token } });
-        toast('로그인 되었습니다.');
+        toast.success('로그인 되었습니다.');
       } catch (error) {
         toast.error('로그인 실패: 아이디와 비밀번호를 확인해주세요.');
       } finally {
@@ -63,7 +63,7 @@ const AuthContainer = () => {
       const token = cookies['token'].trim();
       if (token) {
         await loginMutation({ variables: { token } });
-        toast('로그인 되었습니다.');
+        toast.success('로그인 되었습니다.');
       }
     } catch (error) {}
   };
