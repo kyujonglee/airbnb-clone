@@ -65,6 +65,8 @@ Button.defaultProps = {
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,
-  full: PropTypes.bool
+  full: PropTypes.bool,
+  size: PropTypes.string,
+  color: PropTypes.string
 };
 export default Button;

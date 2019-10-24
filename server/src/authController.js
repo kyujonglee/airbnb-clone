@@ -25,7 +25,6 @@ export const naverLoginCallback = async (
     }
     return cb(null, user);
   } catch (error) {
-    console.log(error);
     return cb(error);
   }
 };

@@ -27,19 +27,29 @@ const InputS = styled.input`
   }
 `;
 
-const Input = ({ placeholder, size, type, ...rest }) => {
-  return <InputS placeholder={placeholder} size={size} type={type} {...rest} />;
+const Input = ({ placeholder, size, type, required, ...rest }) => {
+  return (
+    <InputS
+      placeholder={placeholder}
+      size={size}
+      type={type}
+      {...rest}
+      required={required}
+    />
+  );
 };
 
 Input.defaultProps = {
   size: 'medium',
-  type: 'text'
+  type: 'text',
+  required: false
 };
 
 Input.propTypes = {
   placeholder: PropTypes.string,
   size: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  required: PropTypes.bool
 };
 
 export default Input;

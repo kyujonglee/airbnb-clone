@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import PersonnelRow from './PersonnelRow';
 import {
@@ -99,5 +100,9 @@ const Personnel = ({ close }) => {
     </Container>
   );
 };
+
+Personnel.propTypes = {
+  close: PropTypes.func.isRequired
+}
 
 export default React.memo(Personnel);

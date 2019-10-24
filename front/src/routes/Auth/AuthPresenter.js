@@ -74,6 +74,8 @@ const AuthPresenter = ({
   action,
   email,
   password,
+  password2,
+  name,
   onSubmit,
   setAction,
   naverLogin
@@ -90,12 +92,14 @@ const AuthPresenter = ({
             placeholder={'email'}
             type={'email'}
             size={'small'}
+            required={true}
             {...email}
           />
           <Input
             placeholder={'password'}
             type={'password'}
             size={'small'}
+            required={true}
             {...password}
           />
           <ButtonS text={'log in'} full={true} />
@@ -109,7 +113,7 @@ const AuthPresenter = ({
     )}
     {action === 'signIn' && (
       <Wrapper>
-        <Form>
+        <Form onSubmit={onSubmit}>
           <TitleContainer>
             <Title> sign In to </Title>
             <BoldTitle>airbnb</BoldTitle>
@@ -118,16 +122,29 @@ const AuthPresenter = ({
             placeholder={'email'}
             type={'email'}
             size={'small'}
+            required={true}
             {...email}
           />
           <Input
             placeholder={'password'}
             type={'password'}
             size={'small'}
+            required={true}
             {...password}
           />
-          <Input placeholder={'password2'} type={'password'} size={'small'} />
-          <Input placeholder={'name'} size={'small'} />
+          <Input
+            placeholder={'password2'}
+            type={'password'}
+            size={'small'}
+            required={true}
+            {...password2}
+          />
+          <Input
+            placeholder={'name'}
+            size={'small'}
+            required={true}
+            {...name}
+          />
           <ButtonS href="/" text={'sign in'} full={true} />
           <SignContainer>
             <SubText>if you have an account?</SubText>

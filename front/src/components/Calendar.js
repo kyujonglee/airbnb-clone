@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import RangeCalendar from 'rc-calendar/lib/RangeCalendar';
 import koKR from 'rc-calendar/lib/locale/ko_KR';
@@ -51,6 +52,15 @@ const Calendar = ({ close, date, setDate }) => {
       showClear
     />
   );
+};
+
+Calendar.propTypes = {
+  close: PropTypes.func,
+  date: PropTypes.shape({
+    startDate: PropTypes.instanceOf(Date),
+    endDate: PropTypes.instanceOf(Date)
+  }),
+  setDate: PropTypes.func
 };
 
 export default Calendar;

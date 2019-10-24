@@ -76,7 +76,11 @@ const PersonnelRow = ({ text, age, value, increase, decrease }) => {
 };
 
 PersonnelRow.propTypes = {
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  age: PropTypes.string,
+  value: PropTypes.number.isRequired,
+  increase: PropTypes.func.isRequired,
+  decrease: PropTypes.func.isRequired
 };
 
 export default React.memo(PersonnelRow);

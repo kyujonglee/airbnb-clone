@@ -15,8 +15,7 @@ export default (sequelize, DataTypes) =>
         allowNull: false
       },
       naverId: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING
       },
       created_at: {
         type: DataTypes.DATE,

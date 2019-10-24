@@ -1,5 +1,6 @@
-import { User } from '../../../models';
 import bcrypt from 'bcrypt';
+import { User } from '../../../models';
+import { generateToken } from '../../../util';
 
 const saltRounds = 10;
 
@@ -18,8 +19,10 @@ export default {
           password: encrpytPassword,
           name
         });
-        return user;
+        const token = generateToken({ id: user.id });
+        return token;
       } catch (error) {
+        console.log(error);
         throw Error("Can't create user");
       }
     }

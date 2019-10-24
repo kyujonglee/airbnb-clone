@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { gql } from 'apollo-boost';
 import { FaAirbnb } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import { useMutation, useQuery } from 'react-apollo';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Link } from 'react-router-dom';
 import Loader from './Loader';
 
@@ -26,6 +26,12 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0.3rem 0rem;
+`;
+
+const LoadContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Column = styled.div`
@@ -79,9 +85,9 @@ const Header = ({ isLoggedIn }) => {
   if (loading)
     return (
       <Wrapper>
-        <Container>
+        <LoadContainer>
           <Loader />
-        </Container>
+        </LoadContainer>
       </Wrapper>
     );
   if (data)
@@ -94,12 +100,8 @@ const Header = ({ isLoggedIn }) => {
           <Column>
             {isLoggedIn ? (
               <>
-                <LoggedText>
-                  <span role="img" aria-label="smile">
-                    {data.me.name} 😆
-                  </span>
-                </LoggedText>
-                <LoggedText onClick={logout}> 로그아웃</LoggedText>
+                <LoggedText>{data.me.name} </LoggedText>
+                <LoggedText onClick={logout}>로그아웃</LoggedText>
               </>
             ) : (
               <Link to={'/'}>

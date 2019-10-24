@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { gql } from 'apollo-boost';
-import { useMutation } from 'react-apollo';
+import { useMutation } from '@apollo/react-hooks';
 import { useRoomState, useRoomDispatch } from '../../contexts/RoomsContext';
 import {
   usePersonnelState,
@@ -88,6 +89,17 @@ const RoomContainer = ({
       setClick={setClick}
     />
   );
+};
+
+RoomContainer.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  rating: PropTypes.number,
+  imgPath: PropTypes.string.isRequired,
+  bed: PropTypes.number,
+  bathroom: PropTypes.number,
+  bedroom: PropTypes.number
 };
 
 export default RoomContainer;
