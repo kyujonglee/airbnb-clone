@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 module.exports = {
   development: {
     username: 'airbnb',
@@ -18,11 +21,13 @@ module.exports = {
     operatorsAliases: false
   },
   production: {
-    username: 'root',
-    password: null,
-    database: 'database_production',
-    host: '127.0.0.1',
+    username: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    database: 'membership_airbnb',
+    host: process.env.DB_PORT,
     dialect: 'mysql',
-    operatorsAliases: false
+    operatorsAliases: 'no-op',
+    charset: 'utf8',
+    collate: 'utf8_general_ci'
   }
 };
