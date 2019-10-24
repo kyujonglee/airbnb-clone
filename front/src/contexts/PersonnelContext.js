@@ -61,7 +61,7 @@ const reducer = (state, action) => {
       return decreaseAdult(state);
     case 'INCREASE_LITTLE':
       return increaseLittle(state, action.name);
-    case 'DECREASE_LITTTLE':
+    case 'DECREASE_LITTLE':
       return decreaseLittle(state, action.name);
     case 'RESET':
       return initState;

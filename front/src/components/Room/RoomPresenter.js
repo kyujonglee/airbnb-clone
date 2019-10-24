@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import Modal from './Modal';
-import Button from './Button';
-import Confirm from './Confirm';
+import Modal from '../Modal';
+import Button from '../Button';
+import Confirm from '../Confirm';
 
 const Container = styled.div`
   border-radius: 5px;
@@ -59,7 +59,7 @@ const Rating = styled.span`
   color: rgba(0, 0, 0, 0.7);
 `;
 
-const Room = ({
+const RoomPresenter = ({
   id,
   title,
   content,
@@ -67,9 +67,11 @@ const Room = ({
   imgPath,
   bed,
   bathroom,
-  bedroom
+  bedroom,
+  createReservation,
+  click,
+  setClick
 }) => {
-  const [click, setClick] = useState(false);
   return (
     <Container>
       <RoomImage src={imgPath} />
@@ -90,7 +92,15 @@ const Room = ({
           </RatingBox>
           <Button onClick={() => setClick(true)} text={'예약'} />
           <Modal show={click} onClick={() => setClick(false)}>
-            <Confirm title={'예약하시겠습니까?'} message={`${title}`} />
+            <Confirm
+              title={'예약하시겠습니까?'}
+              message={`${title}`}
+              onConfirm={() => {
+                createReservation();
+                setClick(false);
+              }}
+              onDeny={() => setClick(false)}
+            />
           </Modal>
         </Row>
       </Column>
@@ -98,4 +108,4 @@ const Room = ({
   );
 };
 
-export default Room;
+export default RoomPresenter;

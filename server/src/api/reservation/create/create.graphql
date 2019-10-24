@@ -3,5 +3,8 @@ type Mutation {
     checkIn: String!
     checkOut: String!
     roomId: Int!
-  ): Reservation!
+    adult: Int
+    child: Int
+    baby: Int
+  ): Boolean!
 }

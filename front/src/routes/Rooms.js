@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { gql } from 'apollo-boost';
-import Navbar from '../components/Navbar/index.js';
+import Navbar from '../components/Navbar/index';
 import { useQuery } from 'react-apollo';
-import Room from '../components/Room';
+import Room from '../components/Room/index';
 import Loader from '../components/Loader';
 import { useRoomState } from '../contexts/RoomsContext';
 

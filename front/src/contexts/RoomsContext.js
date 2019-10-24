@@ -21,6 +21,8 @@ const reducer = (state, action) => {
         priceStart: action.priceStart,
         priceEnd: action.priceEnd
       };
+    case 'RESET':
+      return initState;
     default:
       return state;
   }
