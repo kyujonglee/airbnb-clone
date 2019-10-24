@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Modal from './Modal';
 import Button from './Button';
+import Confirm from './Confirm';
 
 const Container = styled.div`
   border-radius: 5px;
@@ -32,20 +34,19 @@ const Row = styled.div`
     justify-content: space-between;
     align-items: center;
   }
-  & span {
-    margin-bottom: 0.5rem;
-  }
 `;
 
 const Title = styled.span`
   font-size: 1.2rem;
   color: ${props => props.theme.textColor};
   font-weight: 600;
+  margin-bottom: 0.5rem;
 `;
 
 const Content = styled.span`
   font-size: 0.8rem;
   color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 0.5rem;
 `;
 
 const RatingBox = styled.div``;
@@ -58,7 +59,17 @@ const Rating = styled.span`
   color: rgba(0, 0, 0, 0.7);
 `;
 
-const Room = ({ title, content, rating, imgPath, bed, bathroom, bedroom }) => {
+const Room = ({
+  id,
+  title,
+  content,
+  rating,
+  imgPath,
+  bed,
+  bathroom,
+  bedroom
+}) => {
+  const [click, setClick] = useState(false);
   return (
     <Container>
       <RoomImage src={imgPath} />
@@ -77,7 +88,10 @@ const Room = ({ title, content, rating, imgPath, bed, bathroom, bedroom }) => {
             <Star>★</Star>
             <Rating>({rating})</Rating>
           </RatingBox>
-          <Button text={'예약'} />
+          <Button onClick={() => setClick(true)} text={'예약'} />
+          <Modal show={click} onClick={() => setClick(false)}>
+            <Confirm title={'예약하시겠습니까?'} message={`${title}`} />
+          </Modal>
         </Row>
       </Column>
     </Container>
