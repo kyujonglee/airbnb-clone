@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { gql } from 'apollo-boost';
 import { FaAirbnb } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import { useMutation } from 'react-apollo';
+import { useMutation, useQuery } from 'react-apollo';
 import { Link } from 'react-router-dom';
+import Loader from './Loader';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -14,7 +15,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 6vh;
   color: rgba(0, 0, 0, 0.7);
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 `;
 
 const Container = styled.div`
@@ -48,6 +49,9 @@ const LoggedText = styled.span`
   &:hover {
     transform: translateY(-3px);
   }
+  & + & {
+    margin-left: 0.5rem;
+  }
 `;
 
 const LOGOUT_QUERY = gql`
@@ -56,30 +60,56 @@ const LOGOUT_QUERY = gql`
   }
 `;
 
+const ME_QUERY = gql`
+  {
+    me {
+      id
+      name
+    }
+  }
+`;
+
 const Header = ({ isLoggedIn }) => {
   const [logoutMuatation] = useMutation(LOGOUT_QUERY);
-
+  const { data, loading, error } = useQuery(ME_QUERY);
   const logout = async () => {
     await logoutMuatation();
   };
-  return (
-    <Wrapper>
-      <Container>
-        <Column>
-          <FaAirbnb />
-        </Column>
-        <Column>
-          {isLoggedIn ? (
-            <LoggedText onClick={logout}>로그아웃</LoggedText>
-          ) : (
-            <Link to={'/'}>
-              <LoggedText>로그인</LoggedText>
-            </Link>
-          )}
-        </Column>
-      </Container>
-    </Wrapper>
-  );
+  if (error) return 'error';
+  if (loading)
+    return (
+      <Wrapper>
+        <Container>
+          <Loader />
+        </Container>
+      </Wrapper>
+    );
+  if (data)
+    return (
+      <Wrapper>
+        <Container>
+          <Column>
+            <FaAirbnb />
+          </Column>
+          <Column>
+            {isLoggedIn ? (
+              <>
+                <LoggedText>
+                  <span role="img" aria-label="smile">
+                    {data.me.name} 😆
+                  </span>
+                </LoggedText>
+                <LoggedText onClick={logout}> 로그아웃</LoggedText>
+              </>
+            ) : (
+              <Link to={'/'}>
+                <LoggedText>로그인</LoggedText>
+              </Link>
+            )}
+          </Column>
+        </Container>
+      </Wrapper>
+    );
 };
 
 Header.propTypes = {
