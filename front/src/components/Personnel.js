@@ -50,25 +50,35 @@ const Personnel = ({ close }) => {
     });
   }, [dispatch]);
 
-  const increaseLittle = useCallback(name => {
-    dispatch({
-      type: 'INCREASE_LITTLE',
-      name
-    });
-  }, [dispatch]);
+  const increaseLittle = useCallback(
+    name => {
+      dispatch({
+        type: 'INCREASE_LITTLE',
+        name
+      });
+    },
+    [dispatch]
+  );
 
-  const decreaseLittle = useCallback(name => {
-    dispatch({
-      type: 'DECREASE_LITTLE',
-      name
-    });
-  }, [dispatch]);
+  const decreaseLittle = useCallback(
+    name => {
+      dispatch({
+        type: 'DECREASE_LITTLE',
+        name
+      });
+    },
+    [dispatch]
+  );
 
   const reset = useCallback(() => {
     dispatch({
       type: 'RESET'
     });
   }, [dispatch]);
+
+  const closeAndSave = () => {
+    close();
+  };
 
   return (
     <Container>
@@ -83,19 +93,19 @@ const Personnel = ({ close }) => {
         text={'어린이'}
         age={'2~12세'}
         value={child}
-        increase={increaseLittle.bind(null, 'child')}
-        decrease={decreaseLittle.bind(null, 'child')}
+        increase={useCallback(increaseLittle.bind(null, 'child'), [])}
+        decrease={useCallback(decreaseLittle.bind(null, 'child'), [])}
       />
       <PersonnelRow
         text={'유아'}
         age={'2세 미만'}
         value={baby}
-        increase={increaseLittle.bind(null, 'baby')}
-        decrease={decreaseLittle.bind(null, 'baby')}
+        increase={useCallback(increaseLittle.bind(null, 'baby'), [])}
+        decrease={useCallback(decreaseLittle.bind(null, 'baby'), [])}
       />
       <Row>
         <Text onClick={reset}>{adult + child + baby === 0 || '삭제'}</Text>
-        <Text onClick={close}>저장</Text>
+        <Text onClick={closeAndSave}>저장</Text>
       </Row>
     </Container>
   );
@@ -103,6 +113,6 @@ const Personnel = ({ close }) => {
 
 Personnel.propTypes = {
   close: PropTypes.func.isRequired
-}
+};
 
 export default React.memo(Personnel);

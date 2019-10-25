@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
@@ -48,7 +48,7 @@ const RoomContainer = ({
   const pDispatch = usePersonnelDispatch();
 
   const isPerson = adult !== 0 || child !== 0 || baby !== 0;
-  const createReservation = async () => {
+  const createReservation = useCallback(async () => {
     try {
       if (checkIn < new Date() || !isPerson) {
         throw Error();
@@ -73,7 +73,15 @@ const RoomContainer = ({
         '예약에 실패하셨습니다. \n인원과 날짜를 선택했는지 확인해주세요.'
       );
     }
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    checkIn,
+    checkOut,
+    createReservationMutation,
+    id,
+    pDispatch,
+    rDispatch
+  ]);
   return (
     <RoomPresenter
       createReservation={createReservation}
@@ -102,4 +110,4 @@ RoomContainer.propTypes = {
   bedroom: PropTypes.number
 };
 
-export default RoomContainer;
+export default React.memo(RoomContainer);

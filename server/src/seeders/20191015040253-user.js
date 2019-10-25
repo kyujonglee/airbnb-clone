@@ -4,7 +4,7 @@ export default {
   up: async (queryInterface, Sequelize) => {
     const saltRounds = 10;
     return queryInterface.bulkInsert(
-      'Users',
+      'users',
       [
         {
           name: 'KyuKyu',
@@ -23,6 +23,6 @@ export default {
     );
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Users', null, {});
+    return queryInterface.bulkDelete('users', null, {});
   }
 };

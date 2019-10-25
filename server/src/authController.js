@@ -32,5 +32,9 @@ export const naverLoginCallback = async (
 export const createToken = (req, res) => {
   const token = generateToken({ id: req.user.id });
   res.cookie('token', token);
-  res.redirect('http://localhost:3000');
+  const address =
+    process.env.NODE_ENV === 'production'
+      ? `http://${process.env.DB_PORT}`
+      : 'http://localhost:3000';
+  res.redirect(address);
 };
