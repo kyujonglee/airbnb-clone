@@ -9,11 +9,11 @@ export default {
       row = { ...row, price: row.price * 1000 };
       return row;
     });
-    return queryInterface.bulkInsert('Rooms', jsonArray, {});
+    return queryInterface.bulkInsert('rooms', jsonArray, {});
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Rooms', null, {});
+    return queryInterface.bulkDelete('rooms', null, {});
   }
 };
 

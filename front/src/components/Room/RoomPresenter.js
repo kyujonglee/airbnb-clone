@@ -108,4 +108,4 @@ const RoomPresenter = ({
   );
 };
 
-export default RoomPresenter;
+export default React.memo(RoomPresenter);
